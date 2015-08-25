@@ -1,0 +1,18 @@
+ibbd-nginx:
+    build: ./../../nginx
+    ports:
+        - "80:80"
+    links:
+        - "ibbd-php-fpm:php-fpm"
+    volumes:
+        - /usr/local/nginx/vhost:/etc/nginx/sites-enabled
+        - /var/log/nginx:/var/log/nginx 
+        - /home/code/ibbd:/var/www
+
+ibbd-php-fpm:
+    build: ./../../php-fpm
+    ports:
+        - "9000:9000"
+    volumes:
+        - /home/code/ibbd:/var/www
+
