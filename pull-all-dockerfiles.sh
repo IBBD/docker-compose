@@ -3,7 +3,7 @@
 # git clone 所有dockerfile项目，如果项目已经clone，则git pull
 # @author Alex 
 
-projects="nginx php-fpm php-cli mongo redis"
+projects="nginx php-fpm php-cli mongo redis mariadb"
 git_url="git@github.com:IBBD/dockerfile-"
 
 # 注意各个项目需要平级的放到同一个目录下
