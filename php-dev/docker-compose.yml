@@ -1,18 +1,45 @@
-ibbd-nginx:
-    build: ./../../nginx
+nginx:
+    image: ibbd/nginx
     ports:
         - "80:80"
     links:
-        - "ibbd-php-fpm:php-fpm"
+        - "php-fpm"
+        - "mysql"
+        - "mongo"
+        - "redis"
     volumes:
-        - /usr/local/nginx/vhost:/etc/nginx/sites-enabled
+        - /etc/nginx/sites-enabled:/etc/nginx/sites-enabled
         - /var/log/nginx:/var/log/nginx 
         - /home/code/ibbd:/var/www
 
-ibbd-php-fpm:
-    build: ./../../php-fpm
+php-fpm:
+    image: ibbd/php-fpm
     ports:
         - "9000:9000"
     volumes:
         - /home/code/ibbd:/var/www
+
+mysql:
+    image: ibbd/mariadb
+    ports:
+        - "3306:3306"
+    volumes:
+        - /data/mariadb:/data/mariadb
+        - /var/log/mariadb:/var/log/mariadb
+
+redis:
+    image: ibbd/redis
+    ports:
+        - "6379:6379"
+    volumes:
+        - /data/redis:/data/redis
+        - /var/log/redis:/var/log/redis
+
+mongo:
+    image: ibbd/mongo
+    ports:
+        - "27071:27071"
+    volumes:
+        - /data/mongo:/data/mongo
+        - /var/log/mongo:/var/log/mongo
 

@@ -6,6 +6,7 @@
 projects="nginx php-fpm php-cli mongo redis"
 git_url="git@github.com:IBBD/dockerfile-"
 
+# 注意各个项目需要平级的放到同一个目录下
 cd ../
 
 for p in $projects
