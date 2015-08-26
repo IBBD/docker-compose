@@ -4,9 +4,6 @@ nginx:
         - "80:80"
     links:
         - "php-fpm"
-        - "mysql"
-        - "mongo"
-        - "redis"
     volumes:
         - /etc/nginx/sites-enabled:/etc/nginx/sites-enabled
         - /var/log/nginx:/var/log/nginx 
@@ -16,23 +13,19 @@ php-fpm:
     image: ibbd/php-fpm
     ports:
         - "9000:9000"
+    links:
+        - "mongo"
+        - "redis"
     volumes:
         - /home/code/ibbd:/var/www
-
-mysql:
-    image: ibbd/mariadb
-    ports:
-        - "3306:3306"
-    volumes:
-        - /data/mariadb:/data/mariadb
-        - /var/log/mariadb:/var/log/mariadb
+        - /var/log/php:/var/log/php
 
 redis:
     image: ibbd/redis
     ports:
         - "6379:6379"
     volumes:
-        - /data/redis:/data/redis
+        - /data/redis:/var/lib/redis
         - /var/log/redis:/var/log/redis
 
 mongo:
@@ -40,6 +33,6 @@ mongo:
     ports:
         - "27071:27071"
     volumes:
-        - /data/mongo:/data/mongo
-        - /var/log/mongo:/var/log/mongo
+        - /data/mongo:/var/lib/mongodb
+        - /var/log/mongo:/var/log/mongodb
 
