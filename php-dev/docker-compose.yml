@@ -8,31 +8,17 @@ nginx:
         - /etc/nginx/sites-enabled:/etc/nginx/sites-enabled
         - /var/log/nginx:/var/log/nginx 
         - /home/code/ibbd:/var/www
+    volumes_from:
+        - "php-fpm"
 
 php-fpm:
     image: ibbd/php-fpm
+    external_links:
+        - ibbd-mariadb:mysql
     ports:
         - "9000:9000"
-    links:
-        - "mongo"
-        - "redis"
     volumes:
         - /home/code/ibbd:/var/www
         - /var/log/php:/var/log/php
 
-redis:
-    image: ibbd/redis
-    ports:
-        - "6379:6379"
-    volumes:
-        - /data/redis:/var/lib/redis
-        - /var/log/redis:/var/log/redis
-
-mongo:
-    image: ibbd/mongo
-    ports:
-        - "27071:27071"
-    volumes:
-        - /data/mongo:/var/lib/mongodb
-        - /var/log/mongo:/var/log/mongodb
 
