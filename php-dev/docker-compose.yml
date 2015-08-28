@@ -15,6 +15,8 @@ php-fpm:
     image: ibbd/php-fpm
     external_links:
         - ibbd-mariadb:mysql
+        - ibbd-redis:redis
+        - ibbd-mongo:mongo
     ports:
         - "9000:9000"
     volumes:
