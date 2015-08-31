@@ -1,5 +1,6 @@
 nginx:
     image: ibbd/nginx
+    container_name: phpdev-nginx
     ports:
         - "80:80"
     links:
@@ -13,6 +14,7 @@ nginx:
 
 php-fpm:
     image: ibbd/php-fpm
+    container_name: phpdev-php-fpm
     external_links:
         - ibbd-mariadb:mysql
         - ibbd-redis:redis

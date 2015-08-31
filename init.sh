@@ -27,3 +27,4 @@ done
 create_dir /var/www 
 
 echo '===> Init is finish!'
+
