@@ -6,8 +6,8 @@ projects="nginx php mongo redis mariadb"
 create_dir() {
     if [ ! -d $1 ]
     then
-        mkdir -p $1
-        echo "mkdir $1 success."
+        mkdir -p $1 \
+            && echo "mkdir $1 success."
     fi
 }
 
