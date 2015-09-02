@@ -13,18 +13,24 @@ root_code=/var/www/
 root_docker=$root_code"docker/"
 root_data=/data/
 
+# 初始化项目
+init_project() {
+    if [ -d $1 ]
+    then
+        cd $1
+        git pull
+        cd ../
+    else
+        git clone git@github.com:IBBD/dockerfile-$1".git" $1
+        cd $1
+        source init.sh
+        cd ../
+    fi
+}
+
 # git clone dockerfile for php and nginx
 cd $root_docker 
-git clone git@github.com:IBBD/dockerfile-php-fpm.git php-fpm
-git clone git@github.com:IBBD/dockerfile-nginx.git nginx
+init_project nginx
+init_project php-fpm
 
-# 初始化nginx的配置文件
-cd nginx
-source init.sh
-cd ../
-
-# 初始化php的配置文件
-cd php-fpm
-source init.sh
-cd ../
-
+echo '===> All is finish!'
