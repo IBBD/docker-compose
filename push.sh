@@ -1,8 +1,10 @@
 #!/bin/bash
 
-docker tag ibbd/$1 git.ibbd.net:5000/ibbd/$1
-docker push git.ibbd.net:5000/ibbd/$1
+source ./.env.sh 
 
-docker rmi git.ibbd.net:5000/ibbd/$1
+docker tag ibbd/$1 $docker_registry:5000/ibbd/$1
+docker push $docker_registry:5000/ibbd/$1
+
+docker rmi $docker_registry:5000/ibbd/$1
 docker images
 
